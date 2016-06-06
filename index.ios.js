@@ -23,7 +23,7 @@ class Root extends Component {
   render() {
       var initState = {
         navigate:{},
-        online:{movies:[]}
+        online:{movies:[],loading:false}
       }
       var  store =  createStore(reducers,initState)
     return (

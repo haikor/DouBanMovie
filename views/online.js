@@ -20,21 +20,20 @@ var Movie = require('../components/movie')
 var {loadOnline} = require('../actions')
 
 class  Online  extends Component{ 
-  state = {
-    dataSource: new ListView.DataSource({
-      rowHasChanged: (row1, row2) => row1 !== row2,
-    }),
-    loaded: false
-  }
    componentDidMount() {
-
       loadOnline(this.props.dispatch);
   }
 
   render() {
-    if(this.props.movies.length==0){
-      return (<Text>no data</Text>)
+    if(this.props.loading){
+       return (<Text>加载中。。。</Text>)
     }
+
+    if(this.props.movies.length==0){
+      return (<Text>没数据</Text>)
+    }
+
+
     return (
 
         <View style={styles.container}> 
@@ -76,7 +75,7 @@ var styles = StyleSheet.create({
 });
 
 function select(store) {
-  return {movies: store.online.movies};
+  return  store.online;
 }
 
 module.exports = connect(select)(Online);
